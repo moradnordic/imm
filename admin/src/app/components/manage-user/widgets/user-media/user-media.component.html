@@ -1,0 +1,9 @@
+<form class="customize-dropzone">
+  <dropzone [config]="imageConfig" (error)="onUploadError($event)" (success)="onUploadSuccess($event)" [message]="text"></dropzone>
+</form>
+@if(button){
+  <div class="next-btn d-flex">
+    <button type="button" class="btn btn-dashed color-4 prev2 btn-pill" (click)="previous()"><i class="fas fa-arrow-left me-2"></i> Previous</button>
+    <button type="button" class="btn btn-gradient color-4 next3 btn-pill" (click)="submit()">submit</button>
+  </div>
+}

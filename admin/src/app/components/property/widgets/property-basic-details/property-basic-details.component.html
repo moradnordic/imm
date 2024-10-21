@@ -1,0 +1,159 @@
+<form [formGroup]="propertyForm" (ngSubmit)="submitPropertyDetails()" enctype="multipart/form-data">
+  <div class="row">
+
+    <!-- Property Type -->
+    <div class="form-group col-sm-4">
+      <label>Type</label>
+      <input type="text" class="form-control" formControlName="type" placeholder="Property Type">
+    </div>
+
+    <!-- Property Status -->
+    <div class="form-group col-sm-4">
+      <label>Statut</label>
+      <input type="text" class="form-control" formControlName="status" placeholder="Property Status">
+    </div>
+
+    <!-- Property Price -->
+    <div class="form-group col-sm-4">
+      <label>Prix</label>
+      <input type="number" class="form-control" formControlName="price" placeholder="Property Price">
+    </div>
+
+    <!-- Max Rooms -->
+    <div class="form-group col-sm-4">
+      <label>Chambres</label>
+      <input type="number" class="form-control" formControlName="rooms" placeholder="Max Rooms">
+    </div>
+
+    <!-- Beds -->
+    <div class="form-group col-sm-4">
+      <label>lits</label>
+      <input type="number" class="form-control" formControlName="beds" placeholder="Number of Beds">
+    </div>
+
+    <!-- Baths -->
+    <div class="form-group col-sm-4">
+      <label>Salle de bain</label>
+      <input type="number" class="form-control" formControlName="baths" placeholder="Number of Baths">
+    </div>
+
+    <!-- Area -->
+    <div class="form-group col-sm-4">
+      <label>Superficie</label>
+      <input type="text" class="form-control" formControlName="area" placeholder="Area in sq ft">
+    </div>
+
+    <!-- Agencies -->
+    <div class="form-group col-sm-4">
+      <label>Agency</label>
+      <input type="text" class="form-control" formControlName="agency" placeholder="Agency Name">
+    </div>
+
+    <div class="form-group col-sm-4">
+      <label>Image</label>
+      <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*">
+    </div>
+
+    <!-- Description -->
+    <div class="form-group col-sm-12">
+      <label>Description</label>
+      <textarea class="form-control" rows="4" formControlName="description" placeholder="Property Description"></textarea>
+    </div>
+
+        <!-- Success Message -->
+        <div *ngIf="successMessage" class="alert alert-success col-sm-12">
+          {{ successMessage }}
+        </div>
+
+    <!-- Submit Button -->
+    <div class="form-group col-sm-12">
+      <button type="submit" class="btn btn-primary" [disabled]="!propertyForm.valid || isLoading">
+        <span *ngIf="isLoading">Chargement...</span>
+        <span *ngIf="!isLoading">Sauvegarder la propriété</span>
+      </button>    </div>
+  </div>
+</form>
+
+
+
+
+
+
+<!-- <div class="row">
+  <div class="form-group col-sm-4">
+    <label>Property Type</label>
+    <input type="text" class="form-control" [placeholder]="formOption == 'Add' ? 'office,villa,apartment' : ''" [value]="formOption == 'Edit' ? 'Villa' : ''">
+  </div>
+  <div class="form-group col-sm-4">
+    <label>Property Status</label>
+    <div class="dropdown" ngbDropdown>
+      <span class="dropdown-toggle font-rubik" ngbDropdownToggle><span>{{ value }}</span><i class="fas fa-angle-down"></i></span>
+      <div class="dropdown-menu text-start" ngbDropdownMenu>
+        @for(status of propertyStatus; track status){
+          <a class="dropdown-item" href="javascript:void(0)" ngbDropdownItem (click)="value = status.title">{{ status.title }}</a>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-4">
+    <label>Property Price</label>
+    <input type="text" class="form-control" [placeholder]="formOption == 'Add' ? '$2800' : ''" [value]="formOption == 'Edit' ? '$3000' : ''">
+  </div>
+  <div class="form-group col-sm-4">
+    <label>Max Rooms</label>
+    <div class="dropdown" ngbDropdown>
+      <span class="dropdown-toggle font-rubik" ngbDropdownToggle><span>{{ roomValue }}</span> <i class="fas fa-angle-down"></i></span>
+      <div class="dropdown-menu text-start" ngbDropdownMenu>
+        @for(room of propertyDetails; track room){
+          <a class="dropdown-item" href="javascript:void(0)" ngbDropdownItem (click)="roomValue = room.value">{{ room.title }}</a>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-4">
+    <label>Beds</label>
+    <div class="dropdown" ngbDropdown>
+      <span class="dropdown-toggle font-rubik" ngbDropdownToggle><span>{{ bedValue }}</span> <i class="fas fa-angle-down"></i></span>
+      <div class="dropdown-menu text-start" ngbDropdownMenu>
+        @for(bed of propertyDetails; track bed){
+          <a class="dropdown-item" href="javascript:void(0)" ngbDropdownItem (click)="bedValue = bed.value">{{ bed.title }}</a>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-4">
+    <label>Baths</label>
+    <div class="dropdown" ngbDropdown>
+      <span class="dropdown-toggle font-rubik" ngbDropdownToggle><span>{{ bathValue }}</span> <i class="fas fa-angle-down"></i></span>
+      <div class="dropdown-menu text-start" ngbDropdownMenu>
+        @for(bath of propertyDetails; track bath){
+          <a class="dropdown-item" href="javascript:void(0)" ngbDropdownItem (click)="bathValue = bath.value">{{ bath.title }}</a>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-4">
+    <label>Area</label>
+    <input type="text" class="form-control" [placeholder]="formOption == 'Add' ? '85 sq ft' : ''" [value]="formOption == 'Edit' ? '85 sq ft' : ''" placeholder="85 sq ft">
+  </div>
+  <div class="form-group col-sm-4">
+    <label>Price</label>
+    <input type="text" class="form-control" [placeholder]="formOption == 'Add' ? '$3000' : ''" [value]="formOption == 'Edit' ? '$3000' : ''">
+  </div>
+  <div class="form-group col-sm-4">
+    <label>Agencies</label>
+    <div class="dropdown" ngbDropdown>
+      <span class="dropdown-toggle font-rubik" ngbDropdownToggle><span>{{ agencyValue }}</span> <i class="fas fa-angle-down"></i></span>
+      <div class="dropdown-menu text-start" ngbDropdownMenu>
+        @for(agency of agencyData; track agency){
+          <a class="dropdown-item" href="javascript:void(0)" ngbDropdownItem (click)="agencyValue = agency.value">{{ agency.title }}</a>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-12">
+    <label>Description</label>
+    <textarea class="form-control" rows="4">{{ description }}</textarea>
+  </div>
+
+</div> -->

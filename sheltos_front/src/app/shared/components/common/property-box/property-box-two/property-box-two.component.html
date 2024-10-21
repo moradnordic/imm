@@ -1,0 +1,84 @@
+<div *ngIf="properties && properties.length > 0">
+  <div *ngFor="let property of properties" class="property-box">
+    <div class="property-image">
+      <!-- Utilisation du composant d'affichage d'images -->
+      <!-- <app-image-slider [latestForRentData]="property.media" ></app-image-slider> -->
+      <!-- <div *ngIf="property.media && property.media.length > 0" class="w-100"> -->
+        <!-- <h4>Images:</h4> -->
+        <!-- <img *ngFor="let media of property.media" [src]="media.url" alt="Image de la propriété" width="500">
+      </div> -->
+      <!-- Labels comme 'Sale', 'No Fees', etc. -->
+      <!-- <div class="labels-left">
+        <div *ngIf="property.status.includes('sale')">
+          <span class="label label-shadow">Sale</span>
+        </div>
+        <div *ngIf="property.status.includes('fees')">
+          <span class="label label-dark">No Fees</span>
+        </div>
+        <div *ngIf="property.status.includes('openHouse')">
+          <span class="label label-success">Open House</span>
+        </div>
+        <div *ngIf="property.status.includes('sold')">
+          <span class="label label-shadow">Sold</span>
+        </div>
+      </div> -->
+
+      <!-- Nombre d'images -->
+      <!-- <div class="seen-data">
+        <app-feather-icons [icon]="'camera'"></app-feather-icons>
+        <span>{{ property.media.length }}</span>
+      </div> -->
+
+      <!-- Boutons d'action -->
+      <!-- <div class="overlay-property-box">
+        <a href="javascript:void(0)" class="effect-round" data-bs-toggle="tooltip" data-bs-placement="left" title="Compare" >
+          <app-feather-icons [icon]="'shuffle'"></app-feather-icons>
+        </a>
+        <a href="javascript:void(0)" class="effect-round like" data-bs-toggle="tooltip" data-bs-placement="left" title="Wishlist">
+          <app-feather-icons [icon]="'heart'"></app-feather-icons>
+        </a>
+      </div>-->
+         <!-- <img *ngFor="let media of property.media" [src]="media.url" alt="Image de la propriété" width="500">  -->
+         <img *ngIf="property.image" [src]="property.image" alt="Property Image" class="img-fluid" />
+
+
+    </div>
+    
+
+    <!-- Détails de la propriété -->
+    <div class="property-details">
+      <span class="font-roboto">{{ property.address?.city }}</span>
+      <a href="javascript:void(0)" >
+        <h3>{{ property.type }}</h3>
+      </a>
+      <h6 >{{ property.price | currency:'EUR' }}</h6>
+      <p class="font-roboto">{{ property.description }}</p>
+
+      <!-- Liste des caractéristiques : chambres, salles de bain, surface -->
+      <ul>
+        <li>
+          <img src="assets/images/svg/icon/double-bed.svg" class="img-fluid" alt="bed-icon" />Bed : {{ property.beds }}
+        </li>
+        <li>
+          <img src="assets/images/svg/icon/bathroom.svg" class="img-fluid" alt="bathroom-icon" />Baths : {{ property.baths }}
+        </li>
+        <li>
+          <img src="assets/images/svg/icon/square-ruler-tool.svg" class="img-fluid ruler-tool" alt="ruler-icon" />Sq Ft : {{ property.area }}
+        </li>
+      </ul>
+
+      <!-- Bouton Détails -->
+      <div class="property-btn d-flex">
+        <span>{{ property.created_at | date }}</span>
+        <button type="button" class="btn btn-dashed btn-pill"  >
+          Details
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Si aucune propriété n'est disponible -->
+<div *ngIf="!properties || properties.length === 0">
+  <p>Aucune propriété disponible.</p>
+</div>
